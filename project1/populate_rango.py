@@ -10,6 +10,16 @@ from rango.models import Category, Page
 
 
 def populate():
+    student_cat = add_cat('Jahanzeb Farrukh',0,0)
+
+    add_page( cat=student_cat,
+              title="github",
+    url="https://github.com/jfarrukh")
+
+    add_page(cat=student_cat,
+             title="pyhtonanywhere",
+             url="https://www.pythonanywhere.com/user/jfarrukh/consoles/")
+
     python_cat = add_cat('Python',128,64)
 
     add_page(cat=python_cat,
