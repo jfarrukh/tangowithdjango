@@ -5,6 +5,7 @@ from rango.models import Page
 
 
 from rango.forms import CategoryForm
+from rango.forms import PageForm
 
 def add_category(request):
     # A HTTP POST?
@@ -82,4 +83,36 @@ def category(request, category_name_slug):
 
     # Go render the response and return it to the client.
     return render(request, 'rango/category.html', context_dict)
+
+def add_page(request, category_name_slug):
+
+     try:
+         cat = Category.objects.get(slug=category_name_slug)
+     except Category.DoesNotExist:
+         cat = None
+
+
+     if request.method == 'POST':
+         form = PageForm(request.POST)
+         if form.is_valid():
+             if cat:
+                 page = form.save(commit=False)
+                 page.category = cat
+                 page.views = 0
+                 page.save()
+
+
+                 return category(request, category_name_slug)
+         else:
+             print form.errors
+     else:
+         form = PageForm()
+
+
+     context_dict = {'form':form, 'category': cat, 'cat_slug': category_name_slug}
+
+
+     return render(request, 'rango/add_page.html', context_dict)
+
+
 
