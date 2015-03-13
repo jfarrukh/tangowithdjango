@@ -40,6 +40,7 @@ INSTALLED_APPS = (
 'django.contrib.staticfiles',
 'rango',
 'registration', # add in the registration package
+'bootstrap_toolkit',
 )
 
 MIDDLEWARE_CLASSES = (
